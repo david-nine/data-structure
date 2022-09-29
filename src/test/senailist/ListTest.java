@@ -4,7 +4,7 @@ import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 import senailist.ArrayListImpl;
-import senailist.LinkedListImpl;
+import senailist.ArrayListWithCounterImpl;
 
 import java.util.List;
 
@@ -46,7 +46,7 @@ public class ListTest {
 
         @Test
         public void lasIndexOfTest() {
-            List<Object> objects = new LinkedListImpl<>();
+            List<Object> objects = new ArrayListWithCounterImpl<>();
             Object objectToSearch = new Object();
             objects.add(objectToSearch);
             objects.add(new Object());
@@ -59,7 +59,7 @@ public class ListTest {
 
         @Test
         public void remove() {
-            List<Object> objects = new LinkedListImpl<>();
+            List<Object> objects = new ArrayListWithCounterImpl<>();
             objects.add(new Object());
             objects.add(1L);
             Object object = new Object();

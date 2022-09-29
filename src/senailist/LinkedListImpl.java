@@ -7,47 +7,20 @@ import java.util.ListIterator;
 
 public class LinkedListImpl<T> implements List<T> {
 
-    private T[] instance;
-    private boolean resizable;
-    private int initialCapacity = DEFAULT_CAPACITY;
-    private final static int DEFAULT_CAPACITY = 10;
-    private int counter = 0;
-
-    public LinkedListImpl() {
-        this(DEFAULT_CAPACITY, true);
-    }
-
-    public LinkedListImpl(int size) {
-        this(size, true);
-    }
-
-    public LinkedListImpl(int size, boolean resizable) {
-        this.instance = (T[]) new Object[size];
-        this.resizable = resizable;
-        this.initialCapacity = size;
-    }
-
-    public boolean isFull() {
-        return this.counter == this.instance.length && !this.resizable;
-    }
+    private KnotList<T> firstElement = new KnotList<>();
 
     @Override
     public int size() {
-        return this.counter;
+        return 0;
     }
 
     @Override
     public boolean isEmpty() {
-        return this.size() == 0;
+        return false;
     }
 
     @Override
-    public boolean contains(Object compare) {
-        for (T object : this.instance) {
-            if (object == compare) {
-                return true;
-            }
-        }
+    public boolean contains(Object o) {
         return false;
     }
 
@@ -58,7 +31,7 @@ public class LinkedListImpl<T> implements List<T> {
 
     @Override
     public Object[] toArray() {
-        return this.instance;
+        return new Object[0];
     }
 
     @Override
@@ -68,9 +41,7 @@ public class LinkedListImpl<T> implements List<T> {
 
     @Override
     public boolean add(T t) {
-        this.instance[this.counter] = t;
-        this.counter++;
-        return true;
+        KnotList<Object> objectKnotList = new KnotList<>();
     }
 
     @Override
@@ -105,10 +76,7 @@ public class LinkedListImpl<T> implements List<T> {
 
     @Override
     public void clear() {
-        if (this.resizable) {
-            this.instance = (T[]) new Object[this.initialCapacity];
-        }
-        this.counter = 0;
+
     }
 
     @Override
@@ -118,15 +86,7 @@ public class LinkedListImpl<T> implements List<T> {
 
     @Override
     public T set(int index, T element) {
-        if ((index - this.counter) < 1) {
-            T objectToSubtract = this.instance[index];
-            this.instance[index] = element;
-            if (index == this.counter + 1) {
-                this.counter++;
-            }
-            return objectToSubtract;
-        }
-        throw new IndexOutOfBoundsException(String.format("Index %s out of bounds for length %s", index, this.size()));
+        return null;
     }
 
     @Override
@@ -136,36 +96,17 @@ public class LinkedListImpl<T> implements List<T> {
 
     @Override
     public T remove(int index) {
-        if (index <= this.counter) {
-            T itemToRemove = this.instance[index];
-            for (int i = 0; i <= this.counter; i++) {
-                this.instance[i] = this.instance[i+1];
-            }
-            this.instance[this.counter] = null;
-            this.counter--;
-            return itemToRemove;
-        }
-        throw new IndexOutOfBoundsException();
+        return null;
     }
 
     @Override
-    public int indexOf(Object compare) {
-        for (int i = 0; i < this.instance.length; i++) {
-            if (this.instance[i] == compare) {
-                return i;
-            }
-        }
-        return -1;
+    public int indexOf(Object o) {
+        return 0;
     }
 
     @Override
-    public int lastIndexOf(Object compare) {
-        for (int i = this.counter; i > -1; i--) {
-            if (this.instance[i] == compare) {
-                return i;
-            }
-        }
-        return -1;
+    public int lastIndexOf(Object o) {
+        return 0;
     }
 
     @Override
