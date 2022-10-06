@@ -1,16 +1,15 @@
-package senailist;
+package senailist.linkedlist;
 
-public class KnotList<T> {
+class KnotList<T> {
 
     private T obj;
     private KnotList<T> next;
 
-    public KnotList(KnotList<T> next) {
-        this.next = next;
+    public KnotList() {
     }
 
-    public KnotList(T obj) {
-        this.obj = obj;
+    public KnotList(KnotList<T> next) {
+        this.next = next;
     }
 
     public KnotList(T obj, KnotList<T> next) {

@@ -3,74 +3,145 @@ package test.senailist;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
-import senailist.ArrayListImpl;
-import senailist.ArrayListWithCounterImpl;
+import senailist.linkedlist.LinkedListImpl;
 
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 @RunWith(Enclosed.class)
 public class ListTest {
 
-    public static class Constructor {
+    public static class LinkedListTest {
 
         @Test
         public void addTest() {
-            long timeStart = System.nanoTime();
-            int a = 2;
-            for (int i = 0; i < 1000000; i++) {
-                a*=2;
-            }
-            System.out.println(System.nanoTime() - timeStart);
-            timeStart = System.nanoTime();
-            for (int i = 0; i < 1000000; i++) {
-                a = a<<1;
-            }
-            System.out.println(System.nanoTime() - timeStart);
+            Object obj1 = new Object();
+            Object obj2 = new Object();
+            Object obj3 = new Object();
+            LinkedListImpl<Object> linkedList = new LinkedListImpl<>();
+            linkedList.add(obj1);
+            linkedList.add(obj2);
+            linkedList.add(obj3);
 
+            assertEquals(linkedList.get(1), obj2);
         }
 
         @Test
-        public void addOutOfDefaultSizeTest() {
-            ArrayListImpl<Object> objects = new ArrayListImpl<>();
-            for (int i = 0; i < 10; i++) {
-                objects.add(new Object());
-            }
-            Object lastObject = new Object();
-            objects.add(lastObject);
+        public void addToIndexLastIndexTest() {
+            Object obj1 = new Object();
+            Object obj2 = new Object();
+            Object obj3 = new Object();
+            Object otherObj = new Object();
+            List<Object> linkedList = new LinkedListImpl<>();
+            linkedList.add(obj1);
+            linkedList.add(obj2);
+            linkedList.add(obj3);
+            linkedList.add(3, otherObj);
 
-            assertEquals(objects.toArray().length, 20);
-            assertEquals(objects.toArray()[11], lastObject);
+            assertEquals(linkedList.get(3), otherObj);
         }
 
         @Test
-        public void lasIndexOfTest() {
-            List<Object> objects = new ArrayListWithCounterImpl<>();
-            Object objectToSearch = new Object();
-            objects.add(objectToSearch);
-            objects.add(new Object());
-            objects.add(objectToSearch);
-            objects.add(new Object());
-            objects.add(new Object());
+        public void addToIndexInMiddleIndexTest() {
+            Object obj1 = new Object();
+            Object obj2 = new Object();
+            Object obj3 = new Object();
+            Object otherObj = new Object();
+            List<Object> linkedList = new LinkedListImpl<>();
+            linkedList.add(obj1);
+            linkedList.add(obj2);
+            linkedList.add(obj3);
+            linkedList.add(1, otherObj);
 
-            assertEquals(objects.lastIndexOf(objectToSearch), 2);
+            assertEquals(linkedList.get(1), otherObj);
+            assertEquals(linkedList.get(2), obj2);
         }
 
         @Test
-        public void remove() {
-            List<Object> objects = new ArrayListWithCounterImpl<>();
-            objects.add(new Object());
-            objects.add(1L);
-            Object object = new Object();
-            objects.add(object);
-            objects.add(new Object());
-            objects.remove(0);
+        public void addToIndexInEmptyList() {
+            Object obj = new Object();
+            List<Object> linkedList = new LinkedListImpl<>();
+            linkedList.add(0, obj);
 
-            assertEquals(objects.toArray()[0], 1L);
-            assertEquals(objects.size(), 3);
+            assertEquals(linkedList.get(0), obj);
+            assertEquals(linkedList.size(), 1);
         }
 
+        @Test
+        public void addToIndexToFirstIndex() {
+            Object obj1 = new Object();
+            Object obj2 = new Object();
+            List<Object> linkedList = new LinkedListImpl<>();
+            linkedList.add(obj1);
+            linkedList.add(0, obj2);
+
+            assertEquals(linkedList.get(0), obj2);
+            assertEquals(linkedList.get(1), obj1);
+            assertEquals(linkedList.size(), 2);
+        }
+
+        @Test
+        public void indexOfTest() {
+            Object obj1 = new Object();
+            Object obj2 = new Object();
+            Object obj3 = new Object();
+            Object obj4 = new Object();
+            List<Object> linkedList = new LinkedListImpl<>();
+            linkedList.add(obj1);
+            linkedList.add(obj2);
+            linkedList.add(obj3);
+            linkedList.add(obj4);
+
+            int result = linkedList.indexOf(obj2);
+            assertEquals(result, 1);
+        }
+
+        @Test
+        public void lastIndexOfTest() {
+            Object obj1 = new Object();
+            Object obj2 = new Object();
+            Object obj3 = new Object();
+            Object obj4 = new Object();
+            Object obj5 = new Object();
+            List<Object> linkedList = new LinkedListImpl<>();
+            linkedList.add(obj1);
+            linkedList.add(obj2);
+            linkedList.add(obj3);
+            linkedList.add(obj4);
+            linkedList.add(obj2);
+            linkedList.add(obj5);
+
+            int result = linkedList.lastIndexOf(obj2);
+            assertEquals(result, 4);
+        }
+
+        @Test
+        public void contains() {
+            Object obj1 = new Object();
+            Object obj2 = new Object();
+            Object obj3 = new Object();
+            List<Object> linkedList = new LinkedListImpl<>();
+            linkedList.add(obj1);
+            linkedList.add(obj2);
+            linkedList.add(obj3);
+
+            boolean result = linkedList.contains(obj2);
+            assertTrue(result);
+        }
+
+        @Test
+        public void containsNotContains() {
+            Object obj1 = new Object();
+            Object obj2 = new Object();
+            Object obj3 = new Object();
+            List<Object> linkedList = new LinkedListImpl<>();
+            linkedList.add(obj1);
+            linkedList.add(obj2);
+            linkedList.add(obj3);
+
+            boolean result = linkedList.contains(new Object());
+            assertFalse(result);
+        }
     }
-
 }
