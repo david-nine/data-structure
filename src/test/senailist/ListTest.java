@@ -5,8 +5,6 @@ import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 import senailist.linkedlist.LinkedListImpl;
 
-import java.util.List;
-
 import static org.junit.Assert.*;
 
 @RunWith(Enclosed.class)
@@ -33,7 +31,7 @@ public class ListTest {
             Object obj2 = new Object();
             Object obj3 = new Object();
             Object otherObj = new Object();
-            List<Object> linkedList = new LinkedListImpl<>();
+            LinkedListImpl<Object> linkedList = new LinkedListImpl<>();
             linkedList.add(obj1);
             linkedList.add(obj2);
             linkedList.add(obj3);
@@ -48,7 +46,7 @@ public class ListTest {
             Object obj2 = new Object();
             Object obj3 = new Object();
             Object otherObj = new Object();
-            List<Object> linkedList = new LinkedListImpl<>();
+            LinkedListImpl<Object> linkedList = new LinkedListImpl<>();
             linkedList.add(obj1);
             linkedList.add(obj2);
             linkedList.add(obj3);
@@ -61,7 +59,7 @@ public class ListTest {
         @Test
         public void addToIndexInEmptyList() {
             Object obj = new Object();
-            List<Object> linkedList = new LinkedListImpl<>();
+            LinkedListImpl<Object> linkedList = new LinkedListImpl<>();
             linkedList.add(0, obj);
 
             assertEquals(linkedList.get(0), obj);
@@ -72,7 +70,7 @@ public class ListTest {
         public void addToIndexToFirstIndex() {
             Object obj1 = new Object();
             Object obj2 = new Object();
-            List<Object> linkedList = new LinkedListImpl<>();
+            LinkedListImpl<Object> linkedList = new LinkedListImpl<>();
             linkedList.add(obj1);
             linkedList.add(0, obj2);
 
@@ -87,7 +85,7 @@ public class ListTest {
             Object obj2 = new Object();
             Object obj3 = new Object();
             Object obj4 = new Object();
-            List<Object> linkedList = new LinkedListImpl<>();
+            LinkedListImpl<Object> linkedList = new LinkedListImpl<>();
             linkedList.add(obj1);
             linkedList.add(obj2);
             linkedList.add(obj3);
@@ -104,7 +102,7 @@ public class ListTest {
             Object obj3 = new Object();
             Object obj4 = new Object();
             Object obj5 = new Object();
-            List<Object> linkedList = new LinkedListImpl<>();
+            LinkedListImpl<Object> linkedList = new LinkedListImpl<>();
             linkedList.add(obj1);
             linkedList.add(obj2);
             linkedList.add(obj3);
@@ -121,7 +119,7 @@ public class ListTest {
             Object obj1 = new Object();
             Object obj2 = new Object();
             Object obj3 = new Object();
-            List<Object> linkedList = new LinkedListImpl<>();
+            LinkedListImpl<Object> linkedList = new LinkedListImpl<>();
             linkedList.add(obj1);
             linkedList.add(obj2);
             linkedList.add(obj3);
@@ -135,13 +133,39 @@ public class ListTest {
             Object obj1 = new Object();
             Object obj2 = new Object();
             Object obj3 = new Object();
-            List<Object> linkedList = new LinkedListImpl<>();
+            LinkedListImpl<Object> linkedList = new LinkedListImpl<>();
             linkedList.add(obj1);
             linkedList.add(obj2);
             linkedList.add(obj3);
 
             boolean result = linkedList.contains(new Object());
             assertFalse(result);
+        }
+
+        @Test
+        public void clearTest() {
+            Object obj1 = new Object();
+            Object obj2 = new Object();
+            Object obj3 = new Object();
+            LinkedListImpl<Object> linkedList = new LinkedListImpl<>();
+            linkedList.add(obj1);
+            linkedList.add(obj2);
+            linkedList.add(obj3);
+            assertEquals(linkedList.size(), 3);
+            linkedList.clear();
+            assertEquals(linkedList.size(), 0);
+        }
+
+        @Test
+        public void printAllTest() {
+            Object obj1 = 5L;
+            Object obj2 = 4L;
+            Object obj3 = 3L;
+            LinkedListImpl<Object> linkedList = new LinkedListImpl<>();
+            linkedList.add(obj1);
+            linkedList.add(obj2);
+            linkedList.add(obj3);
+            linkedList.printAll();
         }
     }
 }
