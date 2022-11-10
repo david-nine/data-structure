@@ -1,39 +1,37 @@
-package senailist;
+package senailist.arraylist;
 
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.ListIterator;
+import java.util.*;
 
-public class ArrayListWithCounterImpl<T> implements List<T> {
+public class ArrayListImpl<T> implements List<T> {
 
     private T[] instance;
     private boolean resizable;
     private int initialCapacity = DEFAULT_CAPACITY;
     private final static int DEFAULT_CAPACITY = 10;
-    private int counter = 0;
 
-    public ArrayListWithCounterImpl() {
+    public ArrayListImpl() {
         this(DEFAULT_CAPACITY, true);
     }
 
-    public ArrayListWithCounterImpl(int size) {
+    public ArrayListImpl(int size) {
         this(size, true);
     }
 
-    public ArrayListWithCounterImpl(int size, boolean resizable) {
+    public ArrayListImpl(int size, boolean resizable) {
         this.instance = (T[]) new Object[size];
         this.resizable = resizable;
         this.initialCapacity = size;
     }
 
-    public boolean isFull() {
-        return this.counter == this.instance.length && !this.resizable;
-    }
-
     @Override
     public int size() {
-        return this.counter;
+        int counter = 0;
+        for (int i = 0; i < this.instance.length; i++) {
+            if (this.instance[i] != null) {
+                counter++;
+            }
+        }
+        return counter;
     }
 
     @Override
@@ -66,11 +64,36 @@ public class ArrayListWithCounterImpl<T> implements List<T> {
         return null;
     }
 
+    public boolean isFull() {
+        if (this.size() == this.instance.length && this.resizable == false) {
+            return true;
+        }
+        return false;
+    }
+
     @Override
     public boolean add(T t) {
-        this.instance[this.counter] = t;
-        this.counter++;
-        return true;
+        for (int i = 0; i < this.instance.length; i++) {
+            if (this.instance[i] == null) {
+                this.instance[i] = t;
+                return true;
+            }
+        }
+        if (this.resizable) {
+            T[] newInstance = resizeArrayList();
+            newInstance[this.instance.length + 1] = t;
+            this.instance = newInstance;
+            return true;
+        }
+        return false;
+    }
+
+    private T[] resizeArrayList() {
+        T[] newInstance = (T[]) new Object[this.instance.length * 2];
+        for (int i = 0; i < this.instance.length; i++) {
+            newInstance[i] = this.instance[i];
+        }
+        return newInstance;
     }
 
     @Override
@@ -105,10 +128,7 @@ public class ArrayListWithCounterImpl<T> implements List<T> {
 
     @Override
     public void clear() {
-        if (this.resizable) {
-            this.instance = (T[]) new Object[this.initialCapacity];
-        }
-        this.counter = 0;
+        this.instance = (T[]) new Object[this.initialCapacity];
     }
 
     @Override
@@ -118,12 +138,9 @@ public class ArrayListWithCounterImpl<T> implements List<T> {
 
     @Override
     public T set(int index, T element) {
-        if ((index - this.counter) < 1) {
+        if ((index - this.size() - 1) < 1) {
             T objectToSubtract = this.instance[index];
             this.instance[index] = element;
-            if (index == this.counter + 1) {
-                this.counter++;
-            }
             return objectToSubtract;
         }
         throw new IndexOutOfBoundsException(String.format("Index %s out of bounds for length %s", index, this.size()));
@@ -136,16 +153,7 @@ public class ArrayListWithCounterImpl<T> implements List<T> {
 
     @Override
     public T remove(int index) {
-        if (index <= this.counter) {
-            T itemToRemove = this.instance[index];
-            for (int i = 0; i <= this.counter; i++) {
-                this.instance[i] = this.instance[i+1];
-            }
-            this.instance[this.counter] = null;
-            this.counter--;
-            return itemToRemove;
-        }
-        throw new IndexOutOfBoundsException();
+        return null;
     }
 
     @Override
@@ -160,7 +168,7 @@ public class ArrayListWithCounterImpl<T> implements List<T> {
 
     @Override
     public int lastIndexOf(Object compare) {
-        for (int i = this.counter; i > -1; i--) {
+        for (int i = this.instance.length -1 ; i > -1; i--) {
             if (this.instance[i] == compare) {
                 return i;
             }

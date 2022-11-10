@@ -4,6 +4,8 @@ import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 import senailist.linkedlist.LinkedListImpl;
+import senailist.treewitharray.ITreeWithArray;
+import senailist.treewitharray.TreeWithArray;
 
 import java.util.List;
 
@@ -142,6 +144,25 @@ public class ListTest {
 
             boolean result = linkedList.contains(new Object());
             assertFalse(result);
+        }
+
+        @Test
+        public void treeWithArrayTest() {
+            ITreeWithArray<Integer> tree = new TreeWithArray<>(2, 4);
+
+            tree.sequentialInsert(7);
+            tree.sequentialInsert(5);
+            tree.sequentialInsert(11);
+            tree.sequentialInsert(2);
+            tree.sequentialInsert(null);
+            tree.sequentialInsert(10);
+            tree.sequentialInsert(10);
+            tree.sequentialInsert(17);
+            tree.sequentialInsert(1);
+            tree.sequentialInsert(3);
+            tree.sequentialInsert(9);
+
+            System.out.print(tree);
         }
     }
 }
