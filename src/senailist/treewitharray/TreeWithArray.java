@@ -78,12 +78,7 @@ public class TreeWithArray<T> implements ITreeWithArray<T> {
             if (elementsInLine == i + 1) {
                 result.append("\n");
             }
-//            for (int element = i; element <= level; element++) {
-//                result.append("\t");
-//                level = level /2;
-//            }
         }
-        // result.append("\n");
         return result.toString();
     }
 }

@@ -3,10 +3,12 @@ package test.senailist;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
+import senailist.algorithms.ordination.BubbleSort;
 import senailist.linkedlist.LinkedListImpl;
 import senailist.treewitharray.ITreeWithArray;
 import senailist.treewitharray.TreeWithArray;
 
+import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.Assert.*;
@@ -163,6 +165,15 @@ public class ListTest {
             tree.sequentialInsert(9);
 
             System.out.print(tree);
+        }
+
+        @Test
+        public void testBubbleSort() {
+            BubbleSort bubbleSort = new BubbleSort();
+
+            Integer[] list = bubbleSort.sort(new Integer[]{7, 6, 5, -1, 2, 8});
+
+            System.out.print(Arrays.toString(list));
         }
     }
 }
